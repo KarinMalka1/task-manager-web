@@ -23,3 +23,47 @@ body {
   flex-direction: column;
   box-sizing: border-box;
 }
+
+/* רשת הימים - ברירת מחדל למחשב */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+/* אזור כפתור האיפוס - ברירת מחדל למחשב */
+.reset-section {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  margin-top: 35px;
+  margin-bottom: 30px;
+}
+
+.reset-button-wrapper {
+  grid-column: 4;
+  display: flex;
+  justify-content: center;
+}
+
+/* התאמה לטלפונים ניידים (מסכים קטנים מ-768 פיקסלים) */
+@media (max-width: 768px) {
+  .days-grid {
+    grid-template-columns: 1fr; /* בטלפון - יום מתחת ליום בטור אחד */
+  }
+
+  .reset-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .reset-button-wrapper {
+    grid-column: auto;
+  }
+
+  /* הקטנת כותרת ענקית למסכים ניידים אם צריך */
+  h1 {
+    font-size: 45px !important;
+  }
+}

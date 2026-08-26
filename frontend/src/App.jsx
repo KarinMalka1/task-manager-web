@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     setWeekDates(getWeekDates());
 
-    // טעינת משימות מהשרת (מוסיפים /tasks לפי נתיב ה-API שלך)
+    // טעינת משימות מהשרת
     fetch(`${API_URL}/tasks`)
       .then(response => response.json())
       .then(data => setTasks(data))
@@ -42,9 +42,8 @@ function App() {
     const title = inputs[day];
     if (!title) return;
 
-    // יוצרים אובייקט מלא שכולל ID וודאי
     const newTask = {
-      id: Date.now(), // מספר ייחודי
+      id: Date.now(),
       title: title,
       completed: false,
       day: day
@@ -57,9 +56,7 @@ function App() {
     })
     .then(response => response.json())
     .then(data => {
-      // מוסיפים את מה שהשרת החזיר (או את המשימה שיצרנו) לרשימה
       setTasks([...tasks, data]);
-      // מנקים רק את תיבת הטקסט של אותו היום
       setInputs({ ...inputs, [day]: '' });
     })
     .catch(err => console.error("Error adding task:", err));
@@ -101,16 +98,19 @@ function App() {
   return (
     <div style={{ padding: '30px 20px', width: '100%', maxWidth: '1400px', margin: '0 auto', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', direction: 'rtl' }}>
       
+      {/* כותרת ממוקמת באמצע */}
       <div style={{ textAlign: 'center', marginBottom: '25px', width: '100%' }}>
         <h1 style={{ margin: 0, fontFamily: 'Caveat, cursive', fontSize: '70px', color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.25)' }}>
           מנהל המשימות השבועי שלי
         </h1>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '12px', width: '100%' }}>
+      {/* רשת הימים - משתמשת במחלקה הרספונסיבית */}
+      <div className="days-grid">
         {DAYS.map((day, index) => (
-          <div key={day} style={{ backgroundColor: 'rgba(255, 255, 255, 0.93)', padding: '12px', borderRadius: '12px', boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)', display: 'flex', flexDirection: 'column', minHeight: '400px' }}>
+          <div key={day} style={{ backgroundColor: 'rgba(255, 255, 255, 0.93)', padding: '12px', borderRadius: '12px', boxShadow: '0 6px 20px rgba(0, 0, 0, 0.12)', display: 'flex', flexDirection: 'column', minHeight: '400px', marginBottom: '10px' }}>
             
+            {/* כותרת היום יחד עם התאריך מתחתיו */}
             <div style={{ textAlign: 'center', borderBottom: '2px solid #e5e4e7', paddingBottom: '8px', marginBottom: '10px' }}>
               <h3 style={{ margin: '0 0 2px 0', color: '#333', fontSize: '17px' }}>
                 {day}
@@ -120,6 +120,7 @@ function App() {
               </span>
             </div>
             
+            {/* רשימת המשימות */}
             <div style={{ flex: 1, overflowY: 'auto', marginBottom: '10px' }}>
               {tasks.filter(task => task.day === day).map(task => (
                 <div key={task.id} style={{ margin: '6px 0', display: 'flex', alignItems: 'center', flexDirection: 'row-reverse', justifyContent: 'flex-end', backgroundColor: '#fff', padding: '6px 8px', borderRadius: '6px', border: '1px solid #e5e4e7' }}>
@@ -132,6 +133,7 @@ function App() {
                   <span style={{ textDecoration: task.completed ? 'line-through' : 'none', color: task.completed ? '#888' : '#000', fontSize: '14px', wordBreak: 'break-word', textAlign: 'right', flex: 1 }}>
                     {task.title}
                   </span>
+                  {/* כפתור מחיקה קטן */}
                   <button 
                     onClick={() => deleteTask(task.id)}
                     style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px', padding: '0 4px', color: '#ff4757' }}
@@ -143,6 +145,7 @@ function App() {
               ))}
             </div>
 
+            {/* אזור הוספת משימה בתחתית */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: 'auto' }}>
               <input 
                 type="text" 
@@ -164,11 +167,12 @@ function App() {
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', width: '100%', marginTop: '35px', marginBottom: '30px' }}>
-        <div style={{ gridColumn: '4', display: 'flex', justifyContent: 'center' }}>
+      {/* כפתור איפוס שבוע - משתמש במחלקות הרספונסיביות */}
+      <div className="reset-section">
+        <div className="reset-button-wrapper">
           <button 
             onClick={resetAllTasks}
-            style={{ padding: '12px 28px', backgroundColor: 'rgb(175, 71, 255)', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', whiteSpace: 'nowrap', marginRight: '25px' }}
+            style={{ padding: '12px 28px', backgroundColor: 'rgb(175, 71, 255)', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', whiteSpace: 'nowrap' }}
           >
             איפוס שבוע
           </button>
