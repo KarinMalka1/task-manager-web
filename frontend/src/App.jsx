@@ -166,7 +166,7 @@ function App() {
         <div style={{ gridColumn: '4', display: 'flex', justifyContent: 'center' }}>
           <button 
             onClick={resetAllTasks}
-            style={{ padding: '12px 28px', backgroundColor: 'rgb(175, 71, 255)', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', whiteSpace: 'nowrap' }}
+            style={{ padding: '12px 28px', backgroundColor: 'rgb(175, 71, 255)', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', whiteSpace: 'nowrap', marginRight: '25px' }}
           >
             איפוס שבוע
           </button>
