@@ -27,7 +27,7 @@ function App() {
     // טוענים את התאריכים של השבוע בטעינת הדף
     setWeekDates(getWeekDates());
 
-    fetch('http://127.0.0.1:8000/tasks')
+    fetch('[https://task-manager-web-3bu4.onrender.com](https://task-manager-web-3bu4.onrender.com)')
       .then(response => response.json())
       .then(data => setTasks(data))
   }, [])
@@ -47,7 +47,7 @@ function App() {
       day: day
     };
 
-    fetch('http://127.0.0.1:8000/tasks', {
+    fetch('[https://task-manager-web-3bu4.onrender.com](https://task-manager-web-3bu4.onrender.com)', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTask)
@@ -62,7 +62,7 @@ function App() {
   const toggleTask = (taskToToggle) => {
     const updatedTask = { ...taskToToggle, completed: !taskToToggle.completed };
 
-    fetch(`http://127.0.0.1:8000/tasks/${taskToToggle.id}`, {
+    fetch('[https://task-manager-web-3bu4.onrender.com](https://task-manager-web-3bu4.onrender.com)', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedTask)
@@ -74,7 +74,7 @@ function App() {
   }
   
   const deleteTask = (taskId) => {
-    fetch(`http://127.0.0.1:8000/tasks/${taskId}`, {
+    fetch('[https://task-manager-web-3bu4.onrender.com](https://task-manager-web-3bu4.onrender.com)', {
       method: 'DELETE',
     })
     .then(() => {
