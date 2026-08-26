@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 const DAYS = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
 
 // כתובת השרת שלך בענן
-const API_URL = '[https://task-manager-web-3bu4.onrender.com](https://task-manager-web-3bu4.onrender.com)';
+const API_URL = 'https://task-manager-web-3bu4.onrender.com';
 
 const getWeekDates = () => {
   const today = new Date();
