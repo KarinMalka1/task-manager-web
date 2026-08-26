@@ -42,7 +42,9 @@ function App() {
     const title = inputs[day];
     if (!title) return;
 
+    // יוצרים אובייקט מלא שכולל ID וודאי
     const newTask = {
+      id: Date.now(), // מספר ייחודי
       title: title,
       completed: false,
       day: day
@@ -55,7 +57,9 @@ function App() {
     })
     .then(response => response.json())
     .then(data => {
+      // מוסיפים את מה שהשרת החזיר (או את המשימה שיצרנו) לרשימה
       setTasks([...tasks, data]);
+      // מנקים רק את תיבת הטקסט של אותו היום
       setInputs({ ...inputs, [day]: '' });
     })
     .catch(err => console.error("Error adding task:", err));
