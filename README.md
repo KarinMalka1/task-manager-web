@@ -1,4 +1,4 @@
-# Weekly Task Manager (מנהל המשימות השבועי)
+# Weekly Task Manager
 
 A modern, full-stack weekly productivity web application designed for seamless task management with a clean interface tailored for Hebrew (RTL) users.
 
