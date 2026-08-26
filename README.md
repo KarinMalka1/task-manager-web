@@ -2,7 +2,7 @@
 
 A modern, full-stack weekly productivity web application designed for seamless task management with a clean interface tailored for Hebrew (RTL) users.
 
-## 🚀 Tech Stack
+## Tech Stack
 * **Frontend:** React, Vite, JavaScript, CSS3
 * **Backend:** Python, FastAPI, RESTful APIs
 * **Features:** 
