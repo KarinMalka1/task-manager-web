@@ -83,7 +83,7 @@ function App() {
   }
 
   const resetAllTasks = () => {
-    fetch('http://127.0.0.1:8000/tasks', { method: 'DELETE' })
+    fetch('[https://task-manager-web-3bu4.onrender.com](https://task-manager-web-3bu4.onrender.com)', { method: 'DELETE' })
       .then(() => {
         setTasks([]);
       });
@@ -166,7 +166,7 @@ function App() {
         <div style={{ gridColumn: '4', display: 'flex', justifyContent: 'center' }}>
           <button 
             onClick={resetAllTasks}
-            style={{ padding: '12px 28px', backgroundColor: 'rgb(175, 71, 255)', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', whiteSpace: 'nowrap', marginLeft: '30px' }}
+            style={{ padding: '12px 28px', backgroundColor: 'rgb(175, 71, 255)', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', whiteSpace: 'nowrap' }}
           >
             איפוס שבוע
           </button>
