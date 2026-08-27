@@ -17,7 +17,6 @@ app.add_middleware(
 
 DB_NAME = "database.db"
 
-# יצירת בסיס הנתונים והטבלאות אם אינם קיימים
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -29,7 +28,6 @@ def init_db():
             password TEXT NOT NULL
         )
     """)
-    # טבלת משימות מקושרת למשתמש
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tasks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,13 +43,11 @@ def init_db():
 
 init_db()
 
-# פונקציית עזר לחיבור למסד הנתונים
 def get_db():
     conn = sqlite3.connect(DB_NAME)
     conn.row_factory = sqlite3.Row  # מאפשר גישה לעמודות לפי שמות
     return conn
 
-# --- Pydantic Models ---
 class UserCreate(BaseModel):
     username: str
     password: str
@@ -72,20 +68,17 @@ class TaskResponse(BaseModel):
     day: str
 
 
-# --- Endpoints של משתמשים (Auth) ---
 
 @app.post("/register")
 def register(user: UserCreate):
     conn = get_db()
     cursor = conn.cursor()
     
-    # בדיקה אם השם משתמש כבר קיים
     cursor.execute("SELECT * FROM users WHERE username = ?", (user.username,))
     if cursor.fetchone():
         conn.close()
         raise HTTPException(status_code=400, detail="שם המשתמש כבר קיים במערכת")
     
-    # הצפנה פשוטה לסיסמה (בפרויקטים אמיתיים משתמשים ב-bcrypt, לתרגיל זה מעולה)
     hashed_password = hashlib.sha256(user.password.encode()).hexdigest()
     
     cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (user.username, hashed_password))
@@ -111,7 +104,6 @@ def login(user: UserLogin):
     return {"message": "התחברת בהצלחה", "user_id": db_user["id"], "username": db_user["username"]}
 
 
-# --- Endpoints של משימות (דורשים user_id) ---
 
 @app.get("/tasks/{user_id}", response_model=List[TaskResponse])
 def get_tasks(user_id: int):
