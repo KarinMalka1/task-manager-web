@@ -20,7 +20,6 @@ DB_NAME = "database.db"
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
-    # טבלת משתמשים
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,7 +44,7 @@ init_db()
 
 def get_db():
     conn = sqlite3.connect(DB_NAME)
-    conn.row_factory = sqlite3.Row  # מאפשר גישה לעמודות לפי שמות
+    conn.row_factory = sqlite3.Row  
     return conn
 
 class UserCreate(BaseModel):
