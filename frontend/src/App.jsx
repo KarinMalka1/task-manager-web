@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 
 const DAYS = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
 
-// כתובת השרת שלך בענן (או http://localhost:8000 לבדיקה מקומית)
 const API_URL = 'https://task-manager-web-3bu4.onrender.com';
 
 const getWeekDates = () => {
@@ -20,13 +19,11 @@ const getWeekDates = () => {
 };
 
 function App() {
-  // מצב משתמש מחובר (נטען מ-localStorage אם קיים)
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('task_manager_user');
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // מצבי טופס התחברות / הרשמה
   const [isRegistering, setIsRegistering] = useState(false);
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -36,7 +33,6 @@ function App() {
   const [inputs, setInputs] = useState({});
   const [weekDates, setWeekDates] = useState([]);
 
-  // טעינת תאריכי השבוע ומשימות של המשתמש המחובר
   useEffect(() => {
     setWeekDates(getWeekDates());
     if (user) {
@@ -47,7 +43,6 @@ function App() {
     }
   }, [user]);
 
-  // פונקציית התחברות / הרשמה
   const handleAuth = (e) => {
     e.preventDefault();
     setAuthError('');
@@ -75,7 +70,6 @@ function App() {
     });
   };
 
-  // התנתקות
   const handleLogout = () => {
     setUser(null);
     setTasks([]);
@@ -142,7 +136,6 @@ function App() {
       .catch(err => console.error("Error resetting tasks:", err));
   }
 
-  // --- אם המשתמש לא מחובר, נציג מסך התחברות / הרשמה עיצובי ---
   if (!user) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', direction: 'rtl', padding: '20px', boxSizing: 'border-box' }}>
@@ -201,7 +194,6 @@ function App() {
     );
   }
 
-  // --- אם המשתמש מחובר, נציג את האפליקציה הרגילה עם כפתור התנתקות ---
   return (
     <div style={{ padding: '30px 20px', width: '100%', maxWidth: '1400px', margin: '0 auto', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', direction: 'rtl' }}>
       
