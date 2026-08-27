@@ -11,3 +11,6 @@ A modern, full-stack weekly productivity web application designed for seamless t
   * Complete RTL support with custom layout alignment.
   * Task creation, completion toggle, and full deletion capabilities.
   * Clean weekly reset mechanism.
+
+## Link to the web
+https://task-manager-web-xi-lemon.vercel.app/
